@@ -1,35 +1,19 @@
+# Importamos las librerias necesarias
 import socket
-import sys
-
-# Create a TCP/IP socket
+# Establecemos el tipo de socket/conexion
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+port = 5000 # Puerto de comunicacion
+sock.bind(('localhost',port)) # IP y Puerto de conexion en una Tupla
 
-# Bind the socket to the port
-server_address = ('localhost', 10000)
-print('starting up on {} port {}'.format(*server_address))
-sock.bind(server_address)
-
-# Listen for incoming connections
+print ("esperando conexiones en el puerto ", port)
+# Vamos a esperar que un cliente se conecte
+# Mientras tanto el script se va a pausar
 sock.listen(1)
+# Cuando un cliente se conecte vamos a obtener la client_addr osea la direccion
+# tambien vamos a obtener la con, osea la conexion que servira para enviar datos y recibir datos
+con, client_addr =  sock.accept()
+text = "Hola, soy el servidor!" # El texto que enviaremos
+con.send(text.encode()) # Enviamos el texto al cliente que se conecta
 
-while True:
-    # Wait for a connection
-    print('waiting for a connection')
-    connection, client_address = sock.accept()
-    try:
-        print('connection from', client_address)
-
-        # Receive the data in small chunks and retransmit it
-        while True:
-            data = connection.recv(16)
-            print('received {!r}'.format(data))
-            if data:
-                print('sending data back to the client')
-                connection.sendall(data)
-            else:
-                print('no data from', client_address)
-                break
-
-    finally:
-        # Clean up the connection
-        connection.close()
+con.close() # Cerramos la conexion
+sock.close() # Cerramos el socket
