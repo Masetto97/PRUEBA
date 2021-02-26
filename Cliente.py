@@ -4,7 +4,7 @@ import socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 port = 5000 # Puerto de comunicacion
 # Realizamos la conexion al la IP y puerto
-sock.connect(('Servidor',port))
+sock.connect(('server',port))
 # Leemos los datos del servidor
 data = sock.recv(4096)
 # Cerramos el socket
