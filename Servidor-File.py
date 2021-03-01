@@ -7,6 +7,8 @@
 #
 #
 import socket
+import os
+
 def main():
     s =  socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     port = 5000 # Puerto de comunicacion
@@ -39,6 +41,8 @@ def main():
     
     print("El archivo se ha recibido correctamente.")
     f.close()
+    print("Mostrando los archivos actuales del directorio:")   
+    os.system('ls')
      
 if __name__ == "__main__":
     main()
