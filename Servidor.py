@@ -1,5 +1,6 @@
 # Importamos las librerias necesarias
 import socket
+import os
 # Establecemos el tipo de socket/conexion
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 port = 5000 # Puerto de comunicacion
@@ -17,3 +18,6 @@ con.send(text.encode()) # Enviamos el texto al cliente que se conecta
 
 con.close() # Cerramos la conexion
 sock.close() # Cerramos el socket
+
+print ("Fin de la conexion, mis archivos actuales son: ")
+os.system('ls')
