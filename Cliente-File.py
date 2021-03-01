@@ -8,8 +8,9 @@
 #
 from socket import socket
 def main():
-    s = socket()
-    s.connect(("localhost", 6030))
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    port = 5000 # Puerto de comunicacion
+    s.connect(('server',port))
     
     while True:
         f = open("prueba.txt", "rb")
