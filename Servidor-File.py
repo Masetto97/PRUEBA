@@ -8,11 +8,11 @@
 #
 from socket import socket, error
 def main():
-    s = socket()
-    
+    s =  socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    port = 5000 # Puerto de comunicacion
     # Escuchar peticiones en el puerto 6030.
-    s.bind(("localhost", 6030))
-    s.listen(0)
+    s.bind(('',port)) # IP y Puerto de conexion en una Tupla
+    s.listen(1)
     
     conn, addr = s.accept()
     f = open("recibido.txt", "wb")
@@ -39,5 +39,6 @@ def main():
     
     print("El archivo se ha recibido correctamente.")
     f.close()
+     
 if __name__ == "__main__":
     main(
