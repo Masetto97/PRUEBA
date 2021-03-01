@@ -12,7 +12,7 @@ def main():
     s.connect(("localhost", 6030))
     
     while True:
-        f = open("archivo.jpg", "rb")
+        f = open("prueba.txt", "rb")
         content = f.read(1024)
         
         while content:
