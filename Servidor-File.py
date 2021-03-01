@@ -6,7 +6,7 @@
 #      Copyright 2014 Recursos Python - www.recursospython.com
 #
 #
-from socket import socket, error
+import socket
 def main():
     s =  socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     port = 5000 # Puerto de comunicacion
