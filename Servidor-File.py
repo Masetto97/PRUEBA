@@ -15,7 +15,7 @@ def main():
     s.listen(0)
     
     conn, addr = s.accept()
-    f = open("recibido.jpg", "wb")
+    f = open("recibido.txt", "wb")
     
     while True:
         try:
