@@ -9,7 +9,7 @@ import socket
 # la máquina y el puerto donde
 # estara a la escucha
 CONEXION = ('ia', 5000)
-ARCHIVO = "Tenis.txt"
+ARCHIVO = "prueba.txt"
 
 
 # Instanciamos el socket y nos
