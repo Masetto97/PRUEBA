@@ -25,7 +25,6 @@ with open(ARCHIVO, "rb") as archivo:
 while True:
     # Enviamos al servidor la cantidad de bytes
     # del archivo que queremos enviar
-    print "Enviando buffer"
     cliente.send(str(len(buffer)))
    
     # Esperamos la respuesta del servidor
