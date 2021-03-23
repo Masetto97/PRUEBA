@@ -6,7 +6,7 @@
 import socket
 
 # Creamos una lista con los datos del la conexión
-CONEXION = ('', 5000)
+CONEXION = ('web', 5000)
 
 servidor = socket.socket()
 
