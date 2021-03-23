@@ -19,13 +19,14 @@ cliente.connect(CONEXION)
 
 # Abrimos el archivo en modo lectura binaria
 # y leemos su contenido
-with open(ARCHIVO, "r") as archivo:
+with open(ARCHIVO, "rb") as archivo:
     buffer = archivo.read()
 
 while True:
     # Enviamos al servidor la cantidad de bytes
     # del archivo que queremos enviar
-    cliente.send(str(len(buffer)))
+    tamanio = str(len(buffer))
+    cliente.send(tamanio.encode("ascii"))
    
     # Esperamos la respuesta del servidor
     recibido = cliente.recv(10)
