@@ -16,11 +16,14 @@ ARCHIVO = "prueba.txt"
 # conectamos
 cliente = socket.socket()
 cliente.connect(CONEXION)
+print("conectado al servidor")
 
 # Abrimos el archivo en modo lectura binaria
 # y leemos su contenido
 with open(ARCHIVO, "rb") as archivo:
     buffer = archivo.read()
+
+print("archivo abierto")
 
 while True:
     # Enviamos al servidor la cantidad de bytes
