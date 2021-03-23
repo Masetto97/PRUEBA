@@ -1,39 +1,39 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-#
-#      client.py
-#
-#      Copyright 2014 Recursos Python - www.recursospython.com
-#
-#
+
+# Envio de archivos: cliente
+# 11Sep
+
 import socket
-def main():
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    port = 5000 # Puerto de comunicacion
-    s.connect(('server',port))
-    
-    while True:
-        f = open("prueba.txt", "rb")
-        content = f.read(1024)
-        
-        while content:
-            # Enviar contenido.
-            s.send(content)
-            content = f.read(1024)
-        
+
+# Creamos una lista con la dirección de
+# la máquina y el puerto donde
+# estara a la escucha
+CONEXION = ('ia', 5000)
+ARCHIVO = "Tenis.txt"
+
+
+# Instanciamos el socket y nos
+# conectamos
+cliente = socket.socket()
+cliente.connect(CONEXION)
+
+# Abrimos el archivo en modo lectura binaria
+# y leemos su contenido
+with open(ARCHIVO, "rb") as archivo:
+    buffer = archivo.read()
+
+while True:
+    # Enviamos al servidor la cantidad de bytes
+    # del archivo que queremos enviar
+    print "Enviando buffer"
+    cliente.send(str(len(buffer)))
+   
+    # Esperamos la respuesta del servidor
+    recibido = cliente.recv(10)
+    if recibido == "OK":
+        # En el caso que la respuesta sea la correcta
+        # enviamos el archivo byte por byte
+        # y salimos del while
+        for byte in buffer:
+            cliente.send(byte)
         break
-    
-    # Se utiliza el caracter de código 1 para indicar
-    # al cliente que ya se ha enviado todo el contenido.
-    try:
-        s.send(chr(1))
-    except TypeError:
-        # Compatibilidad con Python 3.
-        s.send(bytes(chr(1), "utf-8"))
-    
-    # Cerrar conexión y archivo.
-    s.close()
-    f.close()
-    print("El archivo ha sido enviado correctamente.")
-if __name__ == "__main__":
-    main()
