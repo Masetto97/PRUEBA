@@ -19,7 +19,7 @@ cliente.connect(CONEXION)
 
 # Abrimos el archivo en modo lectura binaria
 # y leemos su contenido
-with open(ARCHIVO, "rb") as archivo:
+with open(ARCHIVO, "r") as archivo:
     buffer = archivo.read()
 
 while True:
