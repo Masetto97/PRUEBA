@@ -1,54 +1,16 @@
-# -*- coding: utf-8 -*-
+import socket, pickle
 
-# Envio archivos: servidor
-# 11Sep
+print "Server is Listening....."
+HOST = 'localhost'
+PORT = 50007
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.bind((HOST, PORT))
+s.listen(1)
+conn, addr = s.accept()
+print 'Connected by', addr
 
-import socket
-
-# Creamos una lista con los datos del la conexión
-CONEXION = ('', 5000)
-
-servidor = socket.socket()
-
-# Ponemos el servidor a la escucha
-servidor.bind(CONEXION)
-servidor.listen(5)
-print "Escuchando {0} en {1}".format(*CONEXION)
-# Aceptamos conexiones
-sck, addr = servidor.accept()
-print "Conectado a: {0}:{1}".format(*addr)
-while True:
-    # Recibimos la longitud que envia el cliente
-    recibido = sck.recv(1024).strip()
-    if recibido:
-        print "Recibido:", recibido
-    # Verificamos que lo que recibimos sea un número
-    # en caso que así sea, enviamos el mensaje "OK"
-    # al cliente indicandole que estamos listos
-    # para recibir el archivo
-    if recibido.isdigit():
-        sck.send("OK")
-       
-        # Inicializamos el contador que
-        # guardara la cantidad de bytes recibidos
-        buffer = 0
-        # Abrimos el archivo en modo escritura binaria
-        with open("Archivorecibido.txt", "wb") as archivo:
-            # Nos preparamos para recibir el archivo
-            # con la longitud específica
-            while (buffer <= int(recibido)):
-                data = sck.recv(1)
-                if not len(data):
-                    # Si no recibimos datos
-                    # salimos del bucle
-                    break
-                # Escribimos cada byte en el archivo
-                # y aumentamos en uno el buffer
-                archivo.write(data)
-                buffer += 1
-           
-            if buffer == int(recibido):
-                print "Archivo descargado con éxito"
-            else:
-                print "Ocurrió un error/Archivo incompleto"
-        break
+data = conn.recv(4096)
+data_variable = pickle.loads(data)
+conn.close()
+print data_variable
+print 'Data received from client'
