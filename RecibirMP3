@@ -1,6 +1,6 @@
 import socket, pickle
 s = socket.socket()
-s.bind(("localhost", 50001))
+s.bind(('', 5000))
 s.listen(1)
 c,a = s.accept()
 filetodown = open("./salida.mp3", "wb")
