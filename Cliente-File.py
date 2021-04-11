@@ -1,16 +1,16 @@
 import socket, pickle
-
-HOST = 'localhost'
-PORT = 50007
-# Create a socket connection.
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect((HOST, PORT))
-
-# Create an instance of ProcessData() to send to server.
-variable = 'HOLA SOY EDU'
-# Pickle the object and send it to the server
-data_string = pickle.dumps(variable)
-s.send(data_string)
-
+s = socket.socket()
+s.connect(("localhost", 50001))
+filetosend = open("./Hola.txt", "rb")
+aux = filetosend.read(1024)
+data = pickle.dumps(aux)
+while data:
+    print("Sending...")
+    s.send(data)
+    data = filetosend.read(1024)
+filetosend.close()
+s.send('fin')
+print("Done Sending.")
+print(s.recv(1024))
+s.shutdown(2)
 s.close()
-print 'Data Sent to Server'
