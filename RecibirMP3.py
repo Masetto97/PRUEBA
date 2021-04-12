@@ -1,4 +1,5 @@
 import socket, pickle
+import os
 s = socket.socket()
 s.bind(('', 5000))
 s.listen(1)
@@ -16,7 +17,7 @@ while True:
    filetodown.write(aux)
 filetodown.close()
 c.send("Thank you for connecting.")
-    
+os.system('ls')
 
 c.shutdown(2)
 c.close()
