@@ -19,6 +19,8 @@ filetodown.close()
 c.send("Thank you for connecting.")
 os.system('ls')
 
+os.system('conda run -n IA ./terminal_client.py --model model.pkl --extract prueba2.mid output.mid')
+
 c.shutdown(2)
 c.close()
 s.close()
