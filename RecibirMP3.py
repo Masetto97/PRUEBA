@@ -4,7 +4,7 @@ s = socket.socket()
 s.bind(('', 5000))
 s.listen(1)
 c,a = s.accept()
-filetodown = open("./salida2.mid", "wb")
+filetodown = open("./salidaprueba.mid", "wb")
 while True:
    print("Receiving....")
    aux = c.recv(512)
