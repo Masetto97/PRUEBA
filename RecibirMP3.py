@@ -3,7 +3,7 @@ s = socket.socket()
 s.bind(('', 5000))
 s.listen(1)
 c,a = s.accept()
-filetodown = open("./salida.mp3", "wb")
+filetodown = open("./salida.txt", "wb")
 while True:
    print("Receiving....")
    aux = c.recv(512)
